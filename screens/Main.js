@@ -1,20 +1,17 @@
 // Main.js
 import React from 'react'
-import { StyleSheet, Platform, Image, Text, View , Button} from 'react-native'
+import { StyleSheet, Platform, Image, Text, View , Button , TouchableHighlight , Alert} from 'react-native'
+import {Grid ,Col,Row ,Card,CardItem, Left ,Thumbnail,Body} from 'native-base';
 import firebase from '../config/firebase'
+import HeaderDescription from '../components/headerDescription';
 
-// import * as firebase from 'firebase';
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCgmHzAbTzKE6OCCOlFRc9DF_kactfXNCQ",
-//   authDomain: "fitness-app-98135.firebaseapp.com",
-//   databaseURL: "https://fitness-app-98135.firebaseio.com",
-//   projectId: "fitness-app-98135",
-//   storageBucket: "",
-// };
 
 
 export default class Main extends React.Component {
+
+  static navigationOptions = {
+    title: 'Home page',
+  };
   state = { currentUser: null }
 
   componentDidMount() {
@@ -30,22 +27,96 @@ export default class Main extends React.Component {
     });
   }
 
+  showAlert = (name) => {
+    Alert.alert(
+     'Alert Title',
+     `The user name is: ${name}`,
+     [
+       {text: 'OK', onPress: () => console.log('OK Pressed')},
+     ],
+     { cancelable: false }
+   )
+ }
+
 render() {
     const { currentUser } = this.state
 return (
-      <View style={styles.container}>
-        <Text>
+  
+    <View style={styles.headerContainer}>
+        <HeaderDescription title="Home"/> 
+        {/* <Text>
           Hi {currentUser && currentUser.email}!
         </Text>
-        <Button title="logout" onPress={this.handleLogout} />
+        <Button title="logout" onPress={this.handleLogout} /> */}
+        <Grid>
+           
+            <Row>
+                <Col style={styles.leftButton}>
+                <TouchableHighlight onPress={() =>  this.props.navigation.navigate('exerciseTypeStack')}>
+                    <Card>
+                        <CardItem cardBody>
+                        <Image source={require('../assets/workouts.jpg')}   style={{height: 180, width: 150, flex: 1}}/>
+                        </CardItem>
+                    </Card>
+                </TouchableHighlight>
+                </Col>
+
+                 <Col style={styles.RightButton}>
+                     <TouchableHighlight onPress={() =>  this.props.navigation.navigate('dietStack')}>
+                        <Card>
+                            <CardItem cardBody>
+                            <Image source={require('../assets/diets.jpg')}   style={{height: 180, width: 180, flex: 1}}/>
+                            </CardItem>
+                        </Card>
+                    </TouchableHighlight>
+                </Col>
+            </Row>
+            <Row>
+                <Col style={styles.leftButton}>
+                    <TouchableHighlight onPress={() =>  this.props.navigation.navigate('mapStack')}>
+                            <Card>
+                                <CardItem cardBody>
+                                <Image source={require('../assets/map.jpg')}   style={{height: 180, width: null, flex: 1}}/>
+                                </CardItem>
+                            </Card>
+                        </TouchableHighlight>
+                </Col>
+                 <Col style={styles.RightButton}>
+             
+                <TouchableHighlight onPress={() =>  this.props.navigation.navigate('profileStack')}>
+                    <Card>
+                        <CardItem cardBody>
+                        <Image source={require('../assets/profile.jpg')}   style={{height: 180, width: null, flex: 1}}/>
+                        </CardItem>
+                    </Card>
+                </TouchableHighlight>
+                </Col>
+            </Row>
+           
+            </Grid>
       </View>
     )
   }
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
+  
+  headerContainer:{
+    flex:1,
+    
+    
+},
+  leftButton:{
+    backgroundColor: 'black',
+    height: 180 ,
+    marginLeft:10,
+    marginRight:5,
+    justifyContent:'center'
+},
+RightButton:{
+    backgroundColor: 'black',
+    height: 180 ,
+    marginLeft:5,
+    marginRight:15,
+    justifyContent:'center'
+}
 })
