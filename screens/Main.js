@@ -11,7 +11,19 @@ export default class Main extends React.Component {
 
   static navigationOptions = {
     title: 'Home page',
+    headerTitleStyle: {
+      color: 'white',
+      marginLeft: 80,
+      flex: 1,
+      // fontFamily: 'Roboto_medium',
+      fontWeight: '500'
+    },
+    headerStyle: {
+      backgroundColor: '#000000',
+    },
   };
+
+
   state = { currentUser: null }
 
   componentDidMount() {
@@ -27,16 +39,6 @@ export default class Main extends React.Component {
     });
   }
 
-  showAlert = (name) => {
-    Alert.alert(
-     'Alert Title',
-     `The user name is: ${name}`,
-     [
-       {text: 'OK', onPress: () => console.log('OK Pressed')},
-     ],
-     { cancelable: false }
-   )
- }
 
 render() {
     const { currentUser } = this.state
@@ -106,14 +108,14 @@ const styles = StyleSheet.create({
     
 },
   leftButton:{
-    backgroundColor: 'black',
+    backgroundColor: '#000000',
     height: 180 ,
     marginLeft:10,
     marginRight:5,
     justifyContent:'center'
 },
 RightButton:{
-    backgroundColor: 'black',
+    backgroundColor: '#000000',
     height: 180 ,
     marginLeft:5,
     marginRight:15,

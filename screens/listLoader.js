@@ -14,6 +14,7 @@ const { height, width } = Dimensions.get('window');
 export default class listLoader extends React.Component {
   constructor(props) {
     super(props);
+  
 
     this.state = {
       documentData: [],
@@ -21,6 +22,7 @@ export default class listLoader extends React.Component {
       lastVisible: null,
       loading: false,
       refreshing: false,
+      
     };
   }
 
@@ -45,7 +47,7 @@ export default class listLoader extends React.Component {
       this.setState({ loading: true });
 
       // Cloud Firestore: Query
-      let initialQuery = await database.collection('diet')
+      let initialQuery = await database.collection(this.props.dataCollection)
         .where('id', '<=', 3)
         .orderBy('id')
         .limit(this.state.limit)
@@ -98,7 +100,7 @@ export default class listLoader extends React.Component {
       console.log(this.state.lastVisible);
 
       // Cloud Firestore: Query (Additional Query)
-      let additionalQuery = await database.collection('diet')
+      let additionalQuery = await database.collection(this.props.dataCollection)
         .where('id', '<=', 10)
         .orderBy('id')
         .startAfter(this.state.lastVisible)

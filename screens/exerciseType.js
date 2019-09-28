@@ -1,27 +1,27 @@
-import React ,{useState} from 'react';
-import {View ,StyleSheet, Button, Text } from 'react-native';
+import React, { Component } from 'react'
+import { Text, View } from 'react-native'
 
+export class ExerciseType extends Component {
+    static navigationOptions = {
+        title: 'Workout Types',
+        headerTitleStyle: {
+          color: 'white',
+          marginLeft: 80,
+          flex: 1,
+          // fontFamily: 'Roboto_medium',
+          fontWeight: '500'
+        },
+        headerStyle: {
+          backgroundColor: '#000000',
+        },
+      };
+    render() {
+        return (
+            <View>
+                <Text> textInComponent </Text>
+            </View>
+        )
+    }
+}
 
-
-const exerciseType = props=>{
-    const [,set]=useState();
-
-
-    return(
-        <View style={styles.screen}>
-            
-        </View>
-    );
-};
-
-const styles=StyleSheet.create({
-  
-    screen:{
-        flex:1,
-        padding:10,
-        alignItems:'center',
-    },
-
-})
-
-export default exerciseType;
+export default ExerciseType

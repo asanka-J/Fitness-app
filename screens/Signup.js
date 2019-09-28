@@ -1,11 +1,25 @@
-// SignUp.js
-import React from 'react'
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  TouchableHighlight,
+  Image,
+  Alert
+} from 'react-native';
+import firebase from '../config/firebase';
+import Toast from 'native-base';
 
-import firebase from '../config/firebase'
+export default class SignUpView extends Component {
 
-export default class SignUp extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   state = { email: '', password: '', errorMessage: null }
+
   handleSignUp = () => {
     firebase
       .auth()
@@ -15,50 +29,93 @@ export default class SignUp extends React.Component {
   }
 
 
-
   render() {
     return (
       <View style={styles.container}>
-        <Text>Sign Up</Text>
+
         {this.state.errorMessage &&
-          <Text style={{ color: 'red' }}>
+          <Text style={styles.errorMesseges}>
             {this.state.errorMessage}
           </Text>}
-        <TextInput
-          placeholder="Email"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={email => this.setState({ email })}
-          value={this.state.email}
-        />
-        <TextInput
-          secureTextEntry
-          placeholder="Password"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={password => this.setState({ password })}
-          value={this.state.password}
-        />
-        <Button title="Sign Up" onPress={this.handleSignUp} />
-        <Button
-          title="Already have an account? Login"
-          onPress={() => this.props.navigation.navigate('Login')}
-        />
+
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/male-user/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Email"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              onChangeText={(email) => this.setState({email})}/>
+        </View>
+        
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Password"
+              secureTextEntry={true}
+              underlineColorAndroid='transparent'
+              onChangeText={(password) => this.setState({password})}/>
+        </View>
+
+        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={this.handleSignUp} >
+          <Text style={styles.signUpText}>Sign up</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.props.navigation.navigate('Login')}>
+          <Text style={styles.signUpText}>Already have an account? Login</Text>
+        </TouchableHighlight>
       </View>
-    )
+    );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#9400d3',
   },
-  textInput: {
-    height: 40,
-    width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 8
-  }
-})
+  inputContainer: {
+      borderBottomColor: '#F5FCFF',
+      backgroundColor: '#FFFFFF',
+      borderRadius:30,
+      borderBottomWidth: 1,
+      width:250,
+      height:45,
+      marginBottom:20,
+      flexDirection: 'row',
+      alignItems:'center'
+  },
+  inputs:{
+      height:45,
+      marginLeft:16,
+      borderBottomColor: '#FFFFFF',
+      flex:1,
+  },
+  inputIcon:{
+    width:30,
+    height:30,
+    marginLeft:15,
+    justifyContent: 'center'
+  },
+  buttonContainer: {
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    width:250,
+    borderRadius:30,
+  },
+  signupButton: {
+    backgroundColor: "#ff8c00",
+  },
+  signUpText: {
+    color: 'white',
+  },
+  errorMesseges:{ 
+    color: 'red',
+    backgroundColor:'white',
+     marginBottom:50, 
+     padding:10 }
+});
+ 

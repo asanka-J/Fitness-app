@@ -1,33 +1,36 @@
-import React ,{useState} from 'react';
-import {View ,StyleSheet, Button, Text } from 'react-native';
-import Post from '../components/post';
+import React, { Component } from 'react'
+import { Text, View } from 'react-native'
+import PostList from './listLoader'
+import Icon from '@expo/vector-icons/Ionicons';
 
+export default class Workouts extends Component {
 
-
-
-
-const exercise = props=>{
-    const [,set]=useState();
-
-    var postimage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpGiDrV3FXlDaIIN7FNRiH6-QHO040kQfsBG6wJDKPnGFqTozD";
-    var post2image="https://healthnfitnessclub.com/wp-content/uploads/2018/12/hemmer-curl.jpg";
+    static navigationOptions = {
+        title: 'Workout',
+        headerLeft: (
+            <Icon style={{ paddingLeft: 5, color: '#fff' }} onPress={() => navigation.openDrawer()} name="md-menu" size={20} />
+          ),
+          headerRight: (
+            <Icon style={{ marginRight: 20,color: '#fff', }} name="md-log-out" size={20} onPress={() => navigation.navigate('LogoutHandler')} />
+            
+          ), 
+        headerTitleStyle: {
+          color: 'white',
+          marginLeft: 80,
+          flex: 1,
+          // fontFamily: 'Roboto_medium',
+          fontWeight: '500'
+        },
+        headerStyle: {
+          backgroundColor: '#000000',
+        },
+      };
     
-    return(
-        <View style={styles.screen}>
-            <Post title='Flat Tummy Tips: 7 Steps to a get flat tummy in 7 days' postimage={{uri:postimage}}  profileimage= {{uri: 'https://i.pravatar.cc/150?img=5' }} />
-            <Post title='Best biceps exercise in gym' postimage={{uri:post2image}} profileimage= {{uri: 'https://i.pravatar.cc/150?img=4'}}/>
-        </View>
-    );
-};
-
-const styles=StyleSheet.create({
-  
-    screen:{
-        flex:1,
-        padding:10,
-       
-    },
-
-})
-
-export default exercise;
+    render() {
+        return (
+            <View>
+                <PostList dataCollection='diet'/>
+            </View>
+        )
+    }
+}

@@ -22,6 +22,7 @@ import Map from './screens/map'
 import ExerciseType from './screens/exerciseType'
 
 
+
 // import componenets
 import LogoutHandler from './components/logout'
 import profile from './screens/profile';
@@ -31,8 +32,6 @@ import List from './screens/listLoader';
 
 // Firebase: Cloud Firestore
 export const database = firebase.firestore();
-
-
 
 
 export default class App extends Component {
@@ -87,20 +86,13 @@ const DashboardStackNavigator = createStackNavigator(
       return {
         headerLeft: (
           <Icon style={{ paddingLeft: 5, color: '#fff' }} onPress={() => navigation.openDrawer()} name="md-menu" size={20} />
-        ), 
-        headerStyle: {
-          backgroundColor: '#f4511e',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
+        ),
         headerRight: (
-          <Icon style={{ marginRight: 30,color: '#fff', }} name="md-log-out" size={20} onPress={() => navigation.navigate('LogoutHandler')} />
+          <Icon style={{ marginRight: 20,color: '#fff', }} name="md-log-out" size={20} onPress={() => navigation.navigate('LogoutHandler')} />
           
         ), 
         
-        // headerTitle: navigation.state.routeName
+        
       };
     }
   }
@@ -113,8 +105,11 @@ const navprofileStack = createStackNavigator({
       return {
         headerTitle: 'profile',
         headerLeft: (
-          <Icon style={{ paddingLeft: 5 }} onPress={() => navigation.openDrawer()} name="md-menu" size={30} />
-        )
+          <Icon style={{ paddingLeft: 5, color: '#fff' }} onPress={() => navigation.openDrawer()} name="md-menu" size={20} />
+        ),
+        headerRight: (
+          <Icon style={{ marginRight: 20,color: '#fff', }} name="md-log-out" size={20} onPress={() => navigation.navigate('LogoutHandler')} />
+        ),
       };
     }
   }
@@ -127,8 +122,29 @@ const navMealsStack = createStackNavigator({
       return {
         headerTitle: 'Diet',
         headerLeft: (
-          <Icon style={{ paddingLeft: 5 }} onPress={() => navigation.openDrawer()} name="md-menu" size={30} />
-        )
+          <Icon style={{ paddingLeft: 5, color: '#fff' }} onPress={() => navigation.openDrawer()} name="md-menu" size={20} />
+        ),
+        headerRight: (
+          <Icon style={{ marginRight: 20,color: '#fff', }} name="md-log-out" size={20} onPress={() => navigation.navigate('LogoutHandler')} />
+        ),
+      };
+    }
+  }
+});
+
+const HomeStack = createStackNavigator({
+  Settings: {
+    screen: Main,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerTitle: 'Home page',
+       
+        headerLeft: (
+          <Icon style={{ paddingLeft: 5, color: '#fff' }} onPress={() => navigation.openDrawer()} name="md-menu" size={20} />
+        ),
+        headerRight: (
+          <Icon style={{ marginRight: 20,color: '#fff', }} name="md-log-out" size={20} onPress={() => navigation.navigate('LogoutHandler')} />
+        ), 
       };
     }
   }
@@ -140,10 +156,12 @@ const navWorkoutStack = createStackNavigator({
     screen: Workout,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: 'Workout',
         headerLeft: (
-          <Icon style={{ paddingLeft: 5 }} onPress={() => navigation.openDrawer()} name="md-menu" size={30} />
-        )
+          <Icon style={{ paddingLeft: 5, color: '#fff' }} onPress={() => navigation.openDrawer()} name="md-menu" size={20} />
+        ),
+        headerRight: (
+          <Icon style={{ marginRight: 20,color: '#fff', }} name="md-log-out" size={20} onPress={() => navigation.navigate('LogoutHandler')} />
+        ),
       };
     }
   }
@@ -151,8 +169,14 @@ const navWorkoutStack = createStackNavigator({
 
 // App drawer navigation
 const AppDrawerNavigator = createDrawerNavigator({
+  Main: {
+    screen: DashboardStackNavigator,
+    navigationOptions: {
+      drawerLabel: ()=>null,
+    }
+  },
   Home: {
-    screen: DashboardStackNavigator
+    screen: HomeStack
   },
   Profile: {
     screen: navprofileStack
@@ -163,14 +187,26 @@ const AppDrawerNavigator = createDrawerNavigator({
   Meal: {
     screen: navMealsStack
   }
+  
+
+},  {
+  drawerWidth: 200,
+  drawerPosition: 'left',
+  initialRouteName: 'Home',
+  contentOptions: {
+    activeTintColor: 'white',
+    activeBackgroundColor: 'black',
+    drawerType:'back',
+    lazy:true
+  }
 });
 
 const AppSwitchNavigator = createSwitchNavigator({
       Loading: { screen: Loading },
       SignUp: { screen: SignUp },
       Login: { screen: Login },
-      // Main: { screen: AppDrawerNavigator } ---->uncomment to work properly
-      Main: { screen: List }
+      Main: { screen: AppDrawerNavigator } //---->uncomment to work properly
+      // Main: { screen: Diet }
 
     },
     {
