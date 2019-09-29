@@ -10,7 +10,7 @@ class Post extends Component {
 
  
   render() {
-    let dateString = moment.unix(this.props.item.timeStamp).format("MM/DD/YYYY")
+    
     return (
       <TouchableOpacity onPress={this.props.onPress}>
          
@@ -20,6 +20,7 @@ class Post extends Component {
                   <Left>
                     <Thumbnail source={{uri:this.props.item.profileimage}} />
                     <Body>
+                  
                       <Text>{this.props.item.title}</Text>
                       <Text note>{this.props.item.name}</Text>
                     </Body>

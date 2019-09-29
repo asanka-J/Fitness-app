@@ -20,14 +20,15 @@ import Diet from './screens/diet'
 import Workout from './screens/workout'
 import Map from './screens/map'
 import ExerciseType from './screens/exerciseType'
+import profile from './screens/profile';
+
 
 
 
 // import componenets
 import LogoutHandler from './components/logout'
-import profile from './screens/profile';
-
 import List from './screens/listLoader';
+import PostDetail from './components/postDetail'
 
 
 // Firebase: Cloud Firestore
@@ -68,42 +69,56 @@ export default class App extends Component {
    }
 } // App component end
 
-// create our app's navigation stack
-const DashboardStackNavigator = createStackNavigator(
-  {
-    Home: Main,
-    LogoutHandler: LogoutHandler,
-    profileStack:Profile,
-    dietStack:Diet,
-    workoutStack:Workout,
-    mapStack:Map,
-    exerciseTypeStack:ExerciseType
 
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => {
-      // const { routeName } = navigation.state.routes[navigation.state.index];// get the stack header of the selected tab navigator
+
+
+// const PostDetailStack = createStackNavigator({
+//   Settings: {
+//     screen: PostDetail,
+//     navigationOptions: ({ navigation }) => {
+//       return {
+//         headerTitle: 'PostDetail',
+//         headerLeft: (
+//           <Icon style={{ paddingLeft: 5, color: '#fff' }} onPress={() => navigation.openDrawer()} name="md-menu" size={20} />
+//         ),
+//         headerRight: (
+//           <Icon style={{ marginRight: 20,color: '#fff', }} name="md-log-out" size={20} onPress={() => navigation.navigate('LogoutHandler')} />
+//         ),
+//       };
+//     }
+//   }
+// });
+
+
+
+
+
+const navMapStack = createStackNavigator({
+  Settings: {
+    screen: Map,
+    navigationOptions: ({ navigation }) => {
       return {
+       
         headerLeft: (
           <Icon style={{ paddingLeft: 5, color: '#fff' }} onPress={() => navigation.openDrawer()} name="md-menu" size={20} />
         ),
         headerRight: (
           <Icon style={{ marginRight: 20,color: '#fff', }} name="md-log-out" size={20} onPress={() => navigation.navigate('LogoutHandler')} />
-          
-        ), 
-        
-        
+        ),
       };
     }
   }
-);
+});
+
+
+
 
 const navprofileStack = createStackNavigator({
   Settings: {
     screen: Profile,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: 'profile',
+        
         headerLeft: (
           <Icon style={{ paddingLeft: 5, color: '#fff' }} onPress={() => navigation.openDrawer()} name="md-menu" size={20} />
         ),
@@ -116,11 +131,24 @@ const navprofileStack = createStackNavigator({
 });
 
 const navMealsStack = createStackNavigator({
-  Settings: {
+  DietList: {
     screen: Diet,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: 'Diet',
+       
+        headerLeft: (
+          <Icon style={{ paddingLeft: 5, color: '#fff' }} onPress={() => navigation.openDrawer()} name="md-menu" size={20} />
+        ),
+        headerRight: (
+          <Icon style={{ marginRight: 20,color: '#fff', }} name="md-log-out" size={20} onPress={() => navigation.navigate('LogoutHandler')} />
+        ),
+      };
+    }
+  },
+  DietPost: {
+    screen: PostDetail,
+    navigationOptions: ({ navigation }) => {
+      return {
         headerLeft: (
           <Icon style={{ paddingLeft: 5, color: '#fff' }} onPress={() => navigation.openDrawer()} name="md-menu" size={20} />
         ),
@@ -130,10 +158,11 @@ const navMealsStack = createStackNavigator({
       };
     }
   }
+
 });
 
-const HomeStack = createStackNavigator({
-  Settings: {
+const navHomeStack = createStackNavigator({
+  HomePage: {
     screen: Main,
     navigationOptions: ({ navigation }) => {
       return {
@@ -152,8 +181,21 @@ const HomeStack = createStackNavigator({
 
 
 const navWorkoutStack = createStackNavigator({
-  Settings: {
+  workoutList: {
     screen: Workout,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Icon style={{ paddingLeft: 5, color: '#fff' }} onPress={() => navigation.openDrawer()} name="md-menu" size={20} />
+        ),
+        headerRight: (
+          <Icon style={{ marginRight: 20,color: '#fff', }} name="md-log-out" size={20} onPress={() => navigation.navigate('LogoutHandler')} />
+        ),
+      };
+    }
+  },
+  WorkoutPost: {
+    screen: PostDetail,
     navigationOptions: ({ navigation }) => {
       return {
         headerLeft: (
@@ -169,14 +211,9 @@ const navWorkoutStack = createStackNavigator({
 
 // App drawer navigation
 const AppDrawerNavigator = createDrawerNavigator({
-  Main: {
-    screen: DashboardStackNavigator,
-    navigationOptions: {
-      drawerLabel: ()=>null,
-    }
-  },
+
   Home: {
-    screen: HomeStack
+    screen: navHomeStack
   },
   Profile: {
     screen: navprofileStack
@@ -186,11 +223,14 @@ const AppDrawerNavigator = createDrawerNavigator({
   },
   Meal: {
     screen: navMealsStack
-  }
+  },
+  Map: {
+    screen: navMapStack
+  },
   
 
 },  {
-  drawerWidth: 200,
+  drawerWidth: 280,
   drawerPosition: 'left',
   initialRouteName: 'Home',
   contentOptions: {
@@ -205,8 +245,10 @@ const AppSwitchNavigator = createSwitchNavigator({
       Loading: { screen: Loading },
       SignUp: { screen: SignUp },
       Login: { screen: Login },
-      Main: { screen: AppDrawerNavigator } //---->uncomment to work properly
-      // Main: { screen: Diet }
+      Main: { screen: AppDrawerNavigator },
+      LogoutHandler: LogoutHandler, 
+      
+  
 
     },
     {

@@ -36,9 +36,9 @@ export default class profile extends Component {
           <Text style={styles.info}>Loose weight  / Be healthy</Text>
           <Text style={styles.description}>about me Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was p</Text>
           
-          <TouchableOpacity style={styles.buttonContainer}>
+          {/* <TouchableOpacity style={styles.buttonContainer}>
             <Text>Edit profile</Text>  
-          </TouchableOpacity>              
+          </TouchableOpacity>               */}
           <TouchableOpacity style={styles.buttonContainer}>
             <Text>View my Profile</Text> 
           </TouchableOpacity>

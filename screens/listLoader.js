@@ -1,6 +1,6 @@
 // Imports: Dependencies
 import React, { Component } from "react";
-import { ActivityIndicator, Dimensions, FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Dimensions, FlatList, SafeAreaView, StyleSheet, Text, View ,Button} from 'react-native';
 import { database } from '../App';
 
 // Imports: Components
@@ -159,7 +159,9 @@ export default class listLoader extends React.Component {
   // onPress Selected Item
   selectItem = (item) => {
     try {
-      console.log(`Selected: ${item.title}`)
+
+      this.props.childSelectedPost(item.id);
+     
     }
     catch(error) {
       console.log(error);
@@ -169,6 +171,7 @@ export default class listLoader extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
+     
         <FlatList
           // Data 
           data={this.state.documentData}
@@ -177,7 +180,7 @@ export default class listLoader extends React.Component {
             
             <ItemSelector
               item={item}
-              // onPress={() => {this.selectItem(item)}}
+              onPress={() => {this.selectItem(item)}}
             />
           )}
           // Element Key

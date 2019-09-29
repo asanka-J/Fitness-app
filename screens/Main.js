@@ -54,7 +54,7 @@ return (
            
             <Row>
                 <Col style={styles.leftButton}>
-                <TouchableHighlight onPress={() =>  this.props.navigation.navigate('exerciseTypeStack')}>
+                <TouchableHighlight onPress={() =>  this.props.navigation.navigate('Workout')}>
                     <Card>
                         <CardItem cardBody>
                         <Image source={require('../assets/workouts.jpg')}   style={{height: 180, width: 150, flex: 1}}/>
@@ -64,7 +64,7 @@ return (
                 </Col>
 
                  <Col style={styles.RightButton}>
-                     <TouchableHighlight onPress={() =>  this.props.navigation.navigate('dietStack')}>
+                     <TouchableHighlight onPress={() =>  this.props.navigation.navigate('Meal')}>
                         <Card>
                             <CardItem cardBody>
                             <Image source={require('../assets/diets.jpg')}   style={{height: 180, width: 180, flex: 1}}/>
@@ -75,7 +75,7 @@ return (
             </Row>
             <Row>
                 <Col style={styles.leftButton}>
-                    <TouchableHighlight onPress={() =>  this.props.navigation.navigate('mapStack')}>
+                    <TouchableHighlight onPress={() =>  this.props.navigation.navigate('Map')}>
                             <Card>
                                 <CardItem cardBody>
                                 <Image source={require('../assets/map.jpg')}   style={{height: 180, width: null, flex: 1}}/>
@@ -85,7 +85,7 @@ return (
                 </Col>
                  <Col style={styles.RightButton}>
              
-                <TouchableHighlight onPress={() =>  this.props.navigation.navigate('profileStack')}>
+                <TouchableHighlight onPress={() =>  this.props.navigation.navigate('Profile')}>
                     <Card>
                         <CardItem cardBody>
                         <Image source={require('../assets/profile.jpg')}   style={{height: 180, width: null, flex: 1}}/>
